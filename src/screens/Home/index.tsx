@@ -14,7 +14,7 @@ export function Home() {
 
   const [newSkill, setNewSkill] = useState('');
   const [gretting, setGretting] = useState('')
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState<string[]>([]);
 
   function handleAddSkils() {
     setSkills(oldState => [...oldState, newSkill]);
