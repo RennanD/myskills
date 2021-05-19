@@ -22,12 +22,21 @@ export function Home() {
   const [skills, setSkills] = useState<SkillData[]>([]);
 
   function handleAddSkils() {
+
+    if(!newSkill) {
+      return
+    }
+
     const data = {
       id: String(new Date().getTime()),
       name: newSkill
     }
     setSkills(oldState => [...oldState, data]);
     setNewSkill('');
+  }
+
+  function handleRemoveSkill(id: string) {
+    setSkills(oldState => oldState.filter(skill => skill.id !== id))
   }
 
   useEffect(() => {
@@ -73,7 +82,12 @@ export function Home() {
         style={styles.list}
         showsVerticalScrollIndicator={false}
         keyExtractor={skill => skill.id}
-        renderItem = {({ item: skill }) => <SkillCard skill={skill.name} />}
+        renderItem = {({ item: skill }) => (
+          <SkillCard 
+            skill={skill.name} 
+            onPress={() => handleRemoveSkill(skill.id)}
+          />
+        )}
       />
     </View>
   );
