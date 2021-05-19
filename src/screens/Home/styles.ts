@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#121015',
     paddingHorizontal: 30,
-    paddingVertical: 70,
+    paddingTop: 70,
   },
   title: {
     color: '#fff',
@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
   },
   gretting: {
     color: '#fff'
+  },
+  list: {
+    flex: 1
   }
 })
 

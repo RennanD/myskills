@@ -10,14 +10,23 @@ import { SkillCard } from '../../components/SkillCard';
 
 import styles from './styles'
 
+interface SkillData {
+  id: string;
+  name: string
+}
+
 export function Home() {
 
   const [newSkill, setNewSkill] = useState('');
   const [gretting, setGretting] = useState('')
-  const [skills, setSkills] = useState<string[]>([]);
+  const [skills, setSkills] = useState<SkillData[]>([]);
 
   function handleAddSkils() {
-    setSkills(oldState => [...oldState, newSkill]);
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkill
+    }
+    setSkills(oldState => [...oldState, data]);
     setNewSkill('');
   }
 
@@ -48,7 +57,9 @@ export function Home() {
         onChangeText={setNewSkill}
       />
 
-      <Button onPress={handleAddSkils} />      
+      <Button onPress={handleAddSkils}>
+        Add
+      </Button>     
 
       <Text style={[
         styles.title, 
@@ -59,9 +70,10 @@ export function Home() {
 
       <FlatList 
         data={skills}
+        style={styles.list}
         showsVerticalScrollIndicator={false}
-        keyExtractor={skill => skill}
-        renderItem = {({ item: skill }) => <SkillCard skill={skill} />}
+        keyExtractor={skill => skill.id}
+        renderItem = {({ item: skill }) => <SkillCard skill={skill.name} />}
       />
     </View>
   );
